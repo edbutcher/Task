@@ -1,0 +1,11 @@
+{% extends "appointments/appointment_base.html" %}
+{% load bootstrap3 %}
+
+{% block appointment_content %}
+    <h4>Create a new appointment!</h4>
+    <form action="{% url 'appointments:create' %}" method="post" id="appointmentForm">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-primary btn-large" value="Create">
+    </form>
+{% endblock %}

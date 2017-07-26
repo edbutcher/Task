@@ -1,0 +1,10 @@
+{% extends 'avalon_test/base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% block preappointment %}{% endblock %}
+            {% block appointment_content %}{% endblock %}
+            {% block postappointment %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

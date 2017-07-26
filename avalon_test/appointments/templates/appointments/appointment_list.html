@@ -1,0 +1,48 @@
+{% extends "appointments/appointment_base.html" %}
+{% block preappointment %}
+    <div class="col-md-4">
+    <div class="content">
+        {% if user.is_authenticated %}
+        <h2>Welcome Back!</h2>
+        <h3>{{ user.username }}</h3>
+        {% endif %}
+        <h2>Appointments</h2>
+        <p>Welcome to the appointments page!</p>
+    </div>
+    {% if user.is_authenticated %}
+        <a href="{% url 'appointments:create' %}" class="btn btn-md btn-fill btn-warning">
+        <span class="glyphicon glyphicon-plus-sign"> Create New Appointment!</span>
+        </a>
+    {% endif %}
+    </div>
+{% endblock %}
+
+{% block appointment_content %}
+    <div class="col-md-8">
+        <div class="list-group">
+            <h4>All Appointments:</h4>
+            {% if object_list %}
+            {% for appoinment in object_list %}
+                    <a class="list-group-item" href="{% url 'appointments:single' slug=appoinment.slug %}">
+                    <h3 class="title list-group-item-heading">{{ appoinment.name }}</h3>
+                    <div class="list-group-item-text container-fluid">
+                        {{ appoinment.description_html|safe }}
+                        {{ appoinment.date }} ({{ appoinment.time_start }} - {{ appoinment.time_end }})
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            {% if appoinment.members.count == 0 %}
+                                <span class="badge">not accepted yet</span>
+                            {% else %}
+                                <span class="badge">accepted</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    </a>
+            {% endfor %}
+            {% else %}
+                <h5>No Appointment yet!</h5>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

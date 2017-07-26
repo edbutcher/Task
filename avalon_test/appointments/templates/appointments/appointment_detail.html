@@ -1,0 +1,25 @@
+{% extends "appointments/appointment_base.html" %}
+{% block preappointment %}
+    <h1>{{ appointment.name }}</h1>
+    <h2>{{ appointment.description }}</h2>
+    <h3>{{ appointment.date }} ({{ appointment.time_start }}-{{ appointment.time_end }})</h3>
+    {% if appointment.members.all.count == 0 %}
+        <h3>No members yet!</h3>
+    {% else %}
+        {% for user in appointment.members.all %}
+            <h3>User accepted: {{ user }}</h3>
+        {% endfor %}
+    {% endif %}
+    <dev class="container">
+    {% if user in appointment.members.all %}
+        <a href="{% url 'appointments:leave' slug=appointment.slug %}"
+           class="btn btn-lg btn-fill btn-warning"><span
+           class="glyphicon glyphicon-remove-circle"></span>Leave</a>
+    {% else %}
+        <a href="{% url 'appointments:join' slug=appointment.slug %}"
+           class="btn btn-lg btn-fill btn-warning"><span
+           class="glyphicon glyphicon-ok-circle"></span>Join</a>
+    {% endif %}
+    </dev>
+{% endblock %}
+

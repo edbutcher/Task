@@ -1,0 +1,15 @@
+.mycontent{
+  padding-top: 100px;
+  font-family: 'Bellefair', serif;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: antiquewhite;
+  margin: 0;
+}
+.list-group{
+    font-family: 'Open Sans', sans-serif;
+}
